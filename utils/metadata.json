@@ -1,0 +1,24 @@
+{
+    "gestures": {
+        "down_count": 13670,
+        "ele_count": 23315,
+        "palm_count": 27768,
+        "palm_m_count": 25857,
+        "palm_o_count": 22973,
+        "palm_u_count": 23600,
+        "pointer_count": 54603,
+        "pointer_b_count": 13529,
+        "pointer_f_count": 12791,
+        "pointer_l_count": 13809,
+        "pointer_r_count": 13198,
+        "up_count": 14037
+    },
+    "sizes": {
+        "412x273": 17374,
+        "416x275": 26126,
+        "420x277": 8924,
+        "427x278": 9490,
+        "436x286": 98113,
+        "435x286": 99123
+    }
+}
