@@ -13,6 +13,16 @@ source .venv/Scripts/activate
 ```
 
 ## Running the project
+### Running the GUI (Graphical User Interface)
+First dependent packages have been installed as referenced in the section [Project Setup](#project-setup). The Controller GUI creates an interactive module that removes the need for all users to have a compatible Leap Motion Controller. Future iterations of this project could allow for a live connection to a Leap Motion Controller for dynamic flight control without the GUI. To run the gui you can run the entire project with the following command from the root of the project directory:
+```
+python src/controller_gui.py
+```
+This command assumes you have a Tello drone connected and ready to receive commands evaluated by our computer vision model. If you do not have a drone, the controller can be run with an additional DRYRUN flag. This flag allows for the same model evalutations, but does not require an active Tello drone connection and simply prints the actions it would have taken to the console. An example is below:
+```
+DRYRUN=True python src/controller_gui.py
+```
+
 ### Utility Scripts
 #### Archive Flattener
 The Archive Flattener script is designed to consolidate the LMC data orginally obtained from [LMC Kaggle](https://www.kaggle.com/datasets/gti-upm/leaphandgestuav). The original data is split into subjects first and then further split by gesture, images/sequence, and finally test and train data. This script consolidates this down to a flattened structure of only gesture. This way future testing training of our model can be done in unique and randomizable manners.

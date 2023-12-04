@@ -6,3 +6,5 @@ keras
 matplotlib
 djitellopy
 Pillow
+opencv-python
+tkinter
