@@ -26,10 +26,10 @@ class FlightControllerGUI(tk.Frame):
         ## Model Selection
         self.model_selector_box = tk.Frame(self.menu)
 
-        self.cnn_button = tk.Radiobutton(self.model_selector_box, text="CNN Model", variable=self.selected_model, value="CNN", font=Font(size=18))
+        self.cnn_button = tk.Radiobutton(self.model_selector_box, text="CNN Model", variable=self.selected_model, value="CNN", command=self.change_model, font=Font(size=18))
         self.cnn_button.pack(padx=3, pady=1)
 
-        self.vit_button = tk.Radiobutton(self.model_selector_box, text="ViT Model", variable=self.selected_model, value="ViT", font=Font(size=18))
+        self.vit_button = tk.Radiobutton(self.model_selector_box, text="ViT Model", variable=self.selected_model, value="ViT", command=self.change_model, font=Font(size=18))
         self.vit_button.pack(padx=3, pady=1)
 
         self.model_selector_box.pack(fill=tk.X, padx=1, pady=1)
@@ -62,10 +62,10 @@ class FlightControllerGUI(tk.Frame):
         self.back_btn = tk.Button(self.menu, text="BACK - Fly Backwards 10cm", command=lambda: self.select_gesture("pointer_b"), font=Font(size=14))
         self.back_btn.pack(fill=tk.X, padx=1, pady=1)
 
-        self.open_btn = tk.Button(self.menu, text="OPEN - Start and Liftoff", command=lambda: self.select_gesture("palm_o"), font=Font(size=14))
+        self.open_btn = tk.Button(self.menu, text="PALM DOWN - Rotate Clockwise 30 Degrees", command=lambda: self.select_gesture("palm"), font=Font(size=14))
         self.open_btn.pack(fill=tk.X, padx=1, pady=1)
 
-        self.land_btn = tk.Button(self.menu, text="L - Land the drone", command=lambda: self.select_gesture("ele"), font=Font(size=14))
+        self.land_btn = tk.Button(self.menu, text="PALM UP - Rotate Counter-Clockwise 30 Degrees", command=lambda: self.select_gesture("palm_u"), font=Font(size=14))
         self.land_btn.pack(fill=tk.X, padx=1, pady=1)
 
         self.menu.pack()  
@@ -82,14 +82,24 @@ class FlightControllerGUI(tk.Frame):
         self.img_label = tk.Label(self.menu, image=self.tk_img)
         self.img_label.pack(fill=tk.X, after=self.gesture_label, before=self.down_btn, padx=1, pady=1)
 
+    def change_model(self):
+        self.flight_controller.change_model(self.selected_model.get())
+
     def select_gesture(self, gesture):
         self._update_image(gesture)
-
+        result = self.flight_controller.get_evaluation(self.current_img)
+        self.flight_controller.perform_move(result)
+    
+    def close(self):
+        self.flight_controller.disconnect()
 
 
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("Tello Gesture Flight Controller")
-    FlightControllerGUI(root).pack()
+    controller = FlightControllerGUI(root)
+    controller.pack()
     root.resizable(height=True, width=True)
     root.mainloop()
+    controller.close()
+    

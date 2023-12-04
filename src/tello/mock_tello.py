@@ -16,6 +16,9 @@ class MockTello:
     def get_frame_read(self):
         print("MOCK - CONNECTING TO TELLO")
 
+    def end(self):
+        print("MOCK - TELLO CONNECTION TERMINATED")
+
     def takeoff(self):
         print("MOCK - TELLO INITIATED AUTO TAKEOFF")
     
@@ -40,8 +43,8 @@ class MockTello:
     def back(self, centimeters: int):
         print(f"MOCK - TELLO MOVING {centimeters} BACK")
 
-    def cw(self, degrees: int):
+    def rotate_clockwise(self, degrees: int):
         print(f"MOCK - TELLO ROTATING {degrees} DEGREES CLOCKWISE")
     
-    def ccw(self, degrees: int):
+    def rotate_counter_clockwise(self, degrees: int):
         print(f"MOCK - TELLO ROTATING {degrees} DEGREES COUNTER CLOCKWISE")
