@@ -71,7 +71,7 @@ class FlightControllerGUI(tk.Frame):
         self.menu.pack()  
 
         self.flight_controller = Controller()
-        self.flight_controller.main()
+        self.flight_controller.setup()
 
     def _update_image(self, gesture):
         random_image = random.choice(os.listdir(f"{self.BASE_IMAGE_PATH}//{gesture}"))
