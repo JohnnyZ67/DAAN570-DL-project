@@ -6,3 +6,7 @@ keras
 matplotlib
 djitellopy
 Pillow
+build
+cffi
+opencv-python
+scipy
