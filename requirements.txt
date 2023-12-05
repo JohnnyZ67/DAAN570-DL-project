@@ -1,10 +1,8 @@
-boto3
 pandas
 numpy
-tensorflow
-keras
+tensorflow==2.15.0
+keras==2.15.0
 matplotlib
 djitellopy
 Pillow
 opencv-python
-tkinter

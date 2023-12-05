@@ -1,6 +1,7 @@
-import os
 from tello.mock_tello import MockTello
 from djitellopy import Tello
+import keras
+import os
 
 ## Running controller in Dry run mode with following command
 ## DRYRUN=True python controller.py
@@ -31,7 +32,7 @@ class Controller:
         if model == self.model:
             print("No model change required")
         elif model == "CNN":
-            self.model = "CNN"
+            self.model = keras.models.load_model(f"{os.getcwd()}//models//hg_cnn_az_07.keras")
             print("Model changed to CNN")
         else:
             self.model = "ViT"
