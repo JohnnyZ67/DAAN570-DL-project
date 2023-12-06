@@ -6,3 +6,6 @@ matplotlib
 djitellopy
 Pillow
 opencv-python
+ipykernel
+scikit-learn
+scikit-image
