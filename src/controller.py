@@ -16,7 +16,7 @@ class Controller:
     def __init__(self):
         self.model_selection = ""
         self.model = None
-        self.classes = ["down", "ele", "palm", "palm_m", "palm_o", "palm_u", "pointer", "pointer_b", "pointer_f", "pointer_l", "pointer_r", "up"]
+        self.classes = ["down", "ele", "palm", "palm_m", "palm_u", "pointer_f", "pointer_l", "pointer_r", "up"]
         self.drone_move_limit = 10 ## Distance in CM for Drone movements
         self.dry_run = os.getenv("DRYRUN", False)
 
@@ -41,7 +41,7 @@ class Controller:
             print("No model change required")
         elif model == "CNN":
             self.model_selection = "CNN"
-            self.model = keras.models.load_model(f"{os.getcwd()}//models//hg_cnn_az_05.h5")
+            self.model = keras.models.load_model(f"{os.getcwd()}//models//hg_cnn_az_11.h5")
             print("Model changed to CNN")
         else:
             self.model_selection = "ViT"
@@ -49,15 +49,16 @@ class Controller:
             print("Model changed to ViT")
 
     def get_evaluation(self, gesture_img_path):
-        img = img_to_array(load_img(gesture_img_path, target_size = (224, 224)))
+        img = img_to_array(load_img(gesture_img_path, target_size = (224, 224)))/255
         # plt.imshow(img)
         # plt.show()
         input_arr = np.array([img])
-        ## Returns our model's evaluation based on image
         
         if self.model_selection == "CNN":
             evaluation = self.model.predict(input_arr)
             max_index = np.argmax(evaluation, axis=-1)
+            print(evaluation)
+            print(max_index[0])
             return self.classes[max_index[0]]
 
         return True
