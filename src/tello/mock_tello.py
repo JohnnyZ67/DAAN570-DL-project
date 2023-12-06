@@ -25,22 +25,22 @@ class MockTello:
     def land(self):
         print("MOCK - TELLO INITIATED AUTO LANDING")
     
-    def up(self, centimeters: int):
+    def move_up(self, centimeters: int):
         print(f"MOCK - TELLO MOVING {centimeters} UP")
     
-    def down(self, centimeters: int):
+    def move_down(self, centimeters: int):
         print(f"MOCK - TELLO MOVING {centimeters} DOWN")
 
-    def left(self, centimeters: int):
+    def move_left(self, centimeters: int):
         print(f"MOCK - TELLO MOVING {centimeters} LEFT")
 
-    def right(self, centimeters: int):
+    def move_right(self, centimeters: int):
         print(f"MOCK - TELLO MOVING {centimeters} RIGHT")
 
-    def forward(self, centimeters: int):
+    def move_forward(self, centimeters: int):
         print(f"MOCK - TELLO MOVING {centimeters} FORWARD")
     
-    def back(self, centimeters: int):
+    def move_back(self, centimeters: int):
         print(f"MOCK - TELLO MOVING {centimeters} BACK")
 
     def rotate_clockwise(self, degrees: int):
