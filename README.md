@@ -1,5 +1,5 @@
 # DAAN 570 Deep Learning Group Project
-## Controlling an Unmanned Aerial Vehicle (UAV) with Hand Gestures using Vision Transformers (ViT)
+## Controlling an Unmanned Aerial Vehicle (UAV) with Hand Gestures using Convolutional Neural Networks and Vision Transformers (ViT)
 
 ### Project Setup
 To ensure you have all the necessary packages required to run this project run the venv_setup shell script to install required packages and start your virtual environment.
