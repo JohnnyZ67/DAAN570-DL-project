@@ -1,6 +1,12 @@
-import os
 from tello.mock_tello import MockTello
 from djitellopy import Tello
+from keras.preprocessing.image import load_img, img_to_array
+from skimage import transform
+import matplotlib.pyplot as plt
+from PIL import Image
+import numpy as np
+import keras
+import os
 
 ## Running controller in Dry run mode with following command
 ## DRYRUN=True python controller.py
@@ -8,10 +14,13 @@ from djitellopy import Tello
 class Controller:
 
     def __init__(self):
-        self.model = ""
-        self.change_model("CNN")
+        self.model_selection = ""
+        self.model = None
+        self.classes = ["down", "ele", "palm", "palm_m", "palm_u", "pointer_f", "pointer_l", "pointer_r", "up"]
         self.drone_move_limit = 10 ## Distance in CM for Drone movements
         self.dry_run = os.getenv("DRYRUN", False)
+
+        self.change_model("CNN")
         if self.dry_run:
             print("MOCK - STARTING TELLO CONTROLLER")
             self.tello = MockTello()
@@ -31,20 +40,33 @@ class Controller:
         if model == self.model:
             print("No model change required")
         elif model == "CNN":
-            self.model = "CNN"
+            self.model_selection = "CNN"
+            self.model = keras.models.load_model(f"{os.getcwd()}//models//hg_cnn_az_11.h5")
             print("Model changed to CNN")
         else:
-            self.model = "ViT"
+            self.model_selection = "ViT"
+            self.model = None
             print("Model changed to ViT")
 
-    def get_evaluation(self, gesture_img):
-        ## Returns our model's evaluation based on image
+    def get_evaluation(self, gesture_img_path):
+        img = img_to_array(load_img(gesture_img_path, target_size = (224, 224)))/255
+        # plt.imshow(img)
+        # plt.show()
+        input_arr = np.array([img])
+        
+        if self.model_selection == "CNN":
+            evaluation = self.model.predict(input_arr)
+            max_index = np.argmax(evaluation, axis=-1)
+            print(evaluation)
+            print(max_index[0])
+            return self.classes[max_index[0]]
+
         return True
-    
+        
     def perform_move(self, gesture):
         if gesture == "pointer_f":
             self.tello.move_forward(self.drone_move_limit)
-        elif gesture == "pointer_b":
+        elif gesture == "palm_m":
             self.tello.move_back(self.drone_move_limit)
         elif gesture == "pointer_l":
             self.tello.move_left(self.drone_move_limit)

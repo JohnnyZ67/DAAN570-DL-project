@@ -35,7 +35,8 @@ class FlightControllerGUI(tk.Frame):
         self.model_selector_box.pack(fill=tk.X, padx=1, pady=1)
         
         ## Displays current gesture:
-        self.current_img = Image.open(f"{self.BASE_IMAGE_PATH}//palm_o//sub00_palm_o_0006.png")
+        self.current_img_path = f"{self.BASE_IMAGE_PATH}//palm_o//sub00_palm_o_0006.png"
+        self.current_img = Image.open(self.current_img_path)
         self.tk_img = ImageTk.PhotoImage(self.current_img)
         self.gesture_label = tk.Label(self.menu, text="Gesture:")
         self.gesture_label.pack(fill=tk.X, padx=1, pady=1)
@@ -59,7 +60,7 @@ class FlightControllerGUI(tk.Frame):
         self.frwd_btn = tk.Button(self.menu, text="FORWARD - Fly Forward 10cm", command=lambda: self.select_gesture("pointer_f"), font=Font(size=14))
         self.frwd_btn.pack(fill=tk.X, padx=1, pady=1)
 
-        self.back_btn = tk.Button(self.menu, text="BACK - Fly Backwards 10cm", command=lambda: self.select_gesture("pointer_b"), font=Font(size=14))
+        self.back_btn = tk.Button(self.menu, text="PALM MID - Fly Backwards 10cm", command=lambda: self.select_gesture("palm_m"), font=Font(size=14))
         self.back_btn.pack(fill=tk.X, padx=1, pady=1)
 
         self.open_btn = tk.Button(self.menu, text="PALM DOWN - Rotate Clockwise 30 Degrees", command=lambda: self.select_gesture("palm"), font=Font(size=14))
@@ -75,7 +76,9 @@ class FlightControllerGUI(tk.Frame):
 
     def _update_image(self, gesture):
         random_image = random.choice(os.listdir(f"{self.BASE_IMAGE_PATH}//{gesture}"))
-        self.current_img = Image.open(f"{self.BASE_IMAGE_PATH}//{gesture}//{random_image}")
+        
+        self.current_img_path = f"{self.BASE_IMAGE_PATH}//{gesture}//{random_image}"
+        self.current_img = Image.open(self.current_img_path)
         self.tk_img = ImageTk.PhotoImage(self.current_img)
 
         self.img_label.destroy()
@@ -87,7 +90,7 @@ class FlightControllerGUI(tk.Frame):
 
     def select_gesture(self, gesture):
         self._update_image(gesture)
-        result = self.flight_controller.get_evaluation(self.current_img)
+        result = self.flight_controller.get_evaluation(self.current_img_path)
         self.flight_controller.perform_move(result)
     
     def close(self):
