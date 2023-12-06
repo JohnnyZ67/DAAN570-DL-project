@@ -60,7 +60,7 @@ class FlightControllerGUI(tk.Frame):
         self.frwd_btn = tk.Button(self.menu, text="FORWARD - Fly Forward 10cm", command=lambda: self.select_gesture("pointer_f"), font=Font(size=14))
         self.frwd_btn.pack(fill=tk.X, padx=1, pady=1)
 
-        self.back_btn = tk.Button(self.menu, text="BACK - Fly Backwards 10cm", command=lambda: self.select_gesture("pointer_b"), font=Font(size=14))
+        self.back_btn = tk.Button(self.menu, text="PALM MID - Fly Backwards 10cm", command=lambda: self.select_gesture("palm_m"), font=Font(size=14))
         self.back_btn.pack(fill=tk.X, padx=1, pady=1)
 
         self.open_btn = tk.Button(self.menu, text="PALM DOWN - Rotate Clockwise 30 Degrees", command=lambda: self.select_gesture("palm"), font=Font(size=14))
