@@ -65,7 +65,7 @@ class Controller:
     def perform_move(self, gesture):
         if gesture == "pointer_f":
             self.tello.move_forward(self.drone_move_limit)
-        elif gesture == "pointer_b":
+        elif gesture == "palm_m":
             self.tello.move_back(self.drone_move_limit)
         elif gesture == "pointer_l":
             self.tello.move_left(self.drone_move_limit)
