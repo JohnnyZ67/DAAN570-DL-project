@@ -35,8 +35,3 @@ The Metadata Generator script reads through the flattened data to programmatical
 ```
 python metadata_generator.py
 ```
-
-### Drone Flight
-
-#### Controller
-TBD
