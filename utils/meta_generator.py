@@ -5,7 +5,7 @@ import json
 
 class MetaGenerator:
 
-    DATA_PATH = "D://Resources//DAAN_570_Archive//DAAN570_Data"
+    DATA_PATH = "//Volumes//AZ_SSD512Gb//DAAN570_Project//DAAN570_Data"
 
     def generate_meta(self):
         metadata = {

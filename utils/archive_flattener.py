@@ -3,8 +3,8 @@ import shutil
 
 class ArchiveFlattener:
 
-    BASE_PATH = "D://Resources//DAAN_570_Archive//leaphandgestuav//MultiModHandGestUAV" # Change to where the original data is kept.
-    FLATTENED_PATH = "D://Resources//DAAN_570_Archive//DAAN570_Data"
+    BASE_PATH = "//Volumes//AZ_SSD512Gb//DAAN570_Project//MultiModHandGestUAV" # Change to where the original data is kept.
+    FLATTENED_PATH = "//Volumes//AZ_SSD512Gb//DAAN570_Project//DAAN570_Data"
 
     def flatten_all(self):
        skip_check = 0
